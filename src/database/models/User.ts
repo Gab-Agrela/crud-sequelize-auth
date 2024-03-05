@@ -6,7 +6,7 @@ class User extends Model {
   declare username: string;
   declare email: string;
   declare password: string;
-}
+};
 
 User.init(
   {
@@ -36,3 +36,6 @@ User.init(
     tableName: "user",
   }
 );
+
+export default User;
+
