@@ -9,6 +9,7 @@ const userRouter = Router();
 const controller = {
   register: new RegisterController(),
   user: new UserController(),
+  login: new LoginController(),
 };
 const { hasEmail, hasPassword, hasUsername } = new UserMiddleware();
 
@@ -29,6 +30,13 @@ userRouter.post(
   hasEmail,
   hasPassword,
   controller.register.createUser.bind(controller.register)
+);
+
+userRouter.post(
+  "/login",
+  hasUsername,
+  hasPassword,
+  controller.login.auth.bind(controller.login)
 );
 
 export default userRouter;

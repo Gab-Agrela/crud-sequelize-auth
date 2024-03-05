@@ -1,16 +1,24 @@
 import { NextFunction, Request, Response } from "express";
-import LoginService from "../services/user.service";
+import * as bcrypt from "bcrypt";
+
+import UserService from "../services/user.service";
 
 class LoginController {
-  private service: LoginService = new LoginService();
+  private service: UserService = new UserService();
 
-  async getByUsername(req: Request, resp: Response, next: NextFunction) {
+  async auth(req: Request, resp: Response, next: NextFunction) {
     try {
-      const { username } = req.query;
-      const { status, message } = await this.service.getByUsername(
-        username as string
-      );
-      return resp.status(status).json(message);
+      const { username, password } = req.body;
+
+      const { status, message } = await this.service.getByUsername(username);
+      const passwordAreEqual = await bcrypt.compare(password, message.password);
+
+      if (!passwordAreEqual)
+        return resp
+          .status(400)
+          .json({ message: "Login failed: Invalid password" });
+
+      return resp.status(status).json({ message: "Login Success!" });
     } catch (error) {
       next(error);
     }
