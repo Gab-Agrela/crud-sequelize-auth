@@ -6,7 +6,7 @@ class User extends Model {
   declare username: string;
   declare email: string;
   declare password: string;
-};
+}
 
 User.init(
   {
@@ -33,9 +33,9 @@ User.init(
   },
   {
     sequelize: db,
-    tableName: "user",
+    tableName: "users",
+    timestamps: false,
   }
 );
 
 export default User;
-
