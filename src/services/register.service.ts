@@ -14,7 +14,7 @@ class RegisterService {
       email,
       password: hashedPassword,
     });
-    return resp(200, users);
+    return resp(200, "Conta criada com sucesso!");
   }
 }
 
