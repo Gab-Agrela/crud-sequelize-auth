@@ -2,23 +2,30 @@
   "name": "lexart-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "tsnd ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.18.3",
     "index.js": "^0.0.3",
     "pg": "^8.11.3",
     "sequelize": "^6.37.1",
+<<<<<<< HEAD
+=======
+    "sequelize-cli": "^6.6.2",
+>>>>>>> c0dcf2a5213a3573bab2d03607ccf96e41583608
     "touch": "^3.1.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
   }
 }
