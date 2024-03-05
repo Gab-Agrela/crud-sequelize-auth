@@ -7,7 +7,6 @@ const userRouter = Router();
 const controller = {
   register: new RegisterController(),
 };
-
 const { hasEmail, hasPassword, hasUsername } = new UserMiddleware();
 
 userRouter.post(
