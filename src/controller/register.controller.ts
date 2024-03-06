@@ -1,13 +1,19 @@
 import { NextFunction, Request, Response } from "express";
 import RegisterService from "../services/register.service";
+import UserService from "../services/user.service";
 
 class RegisterController {
-  private service: RegisterService = new RegisterService();
+  private regiterService: RegisterService = new RegisterService();
+  private userService: UserService = new UserService();
 
   async createUser(req: Request, res: Response, next: NextFunction) {
     try {
       const { username, email, password } = req.body;
-      const { status } = await this.service.createUser(
+
+      await this.userService.usernameAlreadyExist(username);
+      await this.userService.emailAlreadyExist(email);
+
+      const { status } = await this.regiterService.createUser(
         username,
         email,
         password
