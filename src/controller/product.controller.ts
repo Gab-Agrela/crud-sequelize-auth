@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-import ProductService from "../services/product.service";
+import ProductService, { TProductFind } from "../services/product.service";
 import {
   TProduct,
   TProductTypeOne,
@@ -11,7 +11,6 @@ import {
   formatTypeTwo,
   typeOfContent,
 } from "../utils/mapProductEntrie";
-
 class ProductController {
   private service: ProductService = new ProductService();
 
@@ -73,6 +72,16 @@ class ProductController {
       return resp
         .status(200)
         .json({ message: "Product deleted", data: product });
+    } catch (error) {
+      next(error);
+    }
+  }
+  async read(req: Request, resp: Response, next: NextFunction) {
+    try {
+      const { query } = req;
+      const product = await this.service.find(query as TProductFind);
+
+      return resp.status(200).json({ message: "Product found", data: product });
     } catch (error) {
       next(error);
     }

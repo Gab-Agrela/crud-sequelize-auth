@@ -8,7 +8,15 @@ const controller = new ProductController();
 const middleware = new ProductMiddleware();
 
 productRouter.post("/create", controller.create.bind(controller));
+
+productRouter.get(
+  "/read",
+  middleware.hasSomeDifferentField,
+  controller.read.bind(controller)
+);
+
 productRouter.patch("/update", controller.update.bind(controller));
+
 productRouter.delete(
   "/delete/:id",
   middleware.hasId,

@@ -3,12 +3,15 @@ import { ModelStatic } from "sequelize";
 import Product from "../database/models/Product";
 import { TProduct } from "../utils/mapProductEntrie";
 
-export type TProductUpdate = {
+export type TProductFind = {
   name: string | undefined;
   brand: string | undefined;
   model: string | undefined;
-  options: { price: number | null; color: string | null }[] | undefined;
 };
+
+export interface TProductUpdate extends TProductFind {
+  options: { price: number | null; color: string | null }[] | undefined;
+}
 class ProductService {
   private model: ModelStatic<Product> = Product;
 
@@ -34,6 +37,12 @@ class ProductService {
 
   async delete(id: number) {
     const product = await this.model.destroy({ where: { id } });
+    return product;
+  }
+
+  async find(param: TProductFind) {
+    const product = await this.model.findAll({ where: { ...param } });
+    if (!product.length) throw new Error("Product not found");
     return product;
   }
 
