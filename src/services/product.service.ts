@@ -17,6 +17,7 @@ class ProductService {
     if (!product) throw new Error("Error when creating product");
     return product;
   }
+
   async createMany(entry: Array<TProduct>) {
     const product = await this.model.bulkCreate(entry);
     if (!product) throw new Error("Error when creating product");
@@ -28,6 +29,11 @@ class ProductService {
       { ...fieldsToUpdate },
       { where: { id } }
     );
+    return product;
+  }
+
+  async delete(id: number) {
+    const product = await this.model.destroy({ where: { id } });
     return product;
   }
 

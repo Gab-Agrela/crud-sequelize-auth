@@ -49,12 +49,30 @@ class ProductController {
       const {
         body: { id, ...fieldsToUpdate },
       } = req;
+
       await this.service.getById(id);
+
       const [product] = await this.service.update(id, fieldsToUpdate);
       if (!product) throw new Error("Error when updating product");
+
       return resp
         .status(200)
         .json({ message: "Product updated", data: product });
+    } catch (error) {
+      next(error);
+    }
+  }
+  async delete(req: Request, resp: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const convertedIdToNumber = +id;
+      await this.service.getById(convertedIdToNumber);
+
+      const product = await this.service.delete(convertedIdToNumber);
+
+      return resp
+        .status(200)
+        .json({ message: "Product deleted", data: product });
     } catch (error) {
       next(error);
     }
