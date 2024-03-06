@@ -18,7 +18,7 @@ class RegisterController {
         email,
         password
       );
-      return res.status(status).json({ message: "Conta criada com sucesso!" });
+      return res.status(status).json({ message: "Account created" });
     } catch (error) {
       next(error);
     }

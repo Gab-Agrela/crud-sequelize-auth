@@ -3,6 +3,12 @@ import { ModelStatic } from "sequelize";
 import Product from "../database/models/Product";
 import { TProduct } from "../utils/mapProductEntrie";
 
+export type TProductUpdate = {
+  name: string | undefined;
+  brand: string | undefined;
+  model: string | undefined;
+  options: { price: number | null; color: string | null }[] | undefined;
+};
 class ProductService {
   private model: ModelStatic<Product> = Product;
 
@@ -14,6 +20,14 @@ class ProductService {
   async createMany(entry: Array<TProduct>) {
     const product = await this.model.bulkCreate(entry);
     if (!product) throw new Error("Error when creating product");
+    return product;
+  }
+
+  async update(id: number, fieldsToUpdate: TProductUpdate) {
+    const product = await this.model.update(
+      { ...fieldsToUpdate },
+      { where: { id } }
+    );
     return product;
   }
 
@@ -33,6 +47,12 @@ class ProductService {
     const product = await this.model.findOne({ where: { model } });
     if (product) throw new Error("Model already registered");
     return;
+  }
+
+  async getById(id: number) {
+    const product = await this.model.findOne({ where: { id } });
+    if (!product) throw new Error("Product not found");
+    return product;
   }
 
   async validateUniqueFields(data: TProduct | Array<TProduct>) {

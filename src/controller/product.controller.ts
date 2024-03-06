@@ -14,6 +14,7 @@ import {
 
 class ProductController {
   private service: ProductService = new ProductService();
+
   async create(req: Request, resp: Response, next: NextFunction) {
     try {
       const { body } = req;
@@ -39,6 +40,21 @@ class ProductController {
       return resp
         .status(200)
         .json({ message: "Product created", data: product });
+    } catch (error) {
+      next(error);
+    }
+  }
+  async update(req: Request, resp: Response, next: NextFunction) {
+    try {
+      const {
+        body: { id, ...fieldsToUpdate },
+      } = req;
+      await this.service.getById(id);
+      const [product] = await this.service.update(id, fieldsToUpdate);
+      if (!product) throw new Error("Error when updating product");
+      return resp
+        .status(200)
+        .json({ message: "Product updated", data: product });
     } catch (error) {
       next(error);
     }
