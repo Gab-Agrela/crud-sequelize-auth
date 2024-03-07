@@ -10,3 +10,4 @@ const router = (0, express_1.Router)();
 router.use("/account", account_router_1.default);
 router.use("/product", product_router_1.default);
 exports.default = router;
+//# sourceMappingURL=index.js.map

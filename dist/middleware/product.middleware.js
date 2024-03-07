@@ -37,3 +37,4 @@ class ProductMiddleware {
     }
 }
 exports.default = ProductMiddleware;
+//# sourceMappingURL=product.middleware.js.map

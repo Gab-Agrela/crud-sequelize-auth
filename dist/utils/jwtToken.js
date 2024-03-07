@@ -24,3 +24,4 @@ const generateJwtToken = (username, id) => __awaiter(void 0, void 0, void 0, fun
     return token;
 });
 exports.default = generateJwtToken;
+//# sourceMappingURL=jwtToken.js.map

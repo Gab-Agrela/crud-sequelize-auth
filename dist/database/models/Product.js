@@ -73,3 +73,4 @@ Product.init({
 User_1.default.hasMany(Product, { as: "products", foreignKey: "userId" });
 Product.belongsTo(User_1.default, { foreignKey: "userId" });
 exports.default = Product;
+//# sourceMappingURL=Product.js.map

@@ -55,3 +55,4 @@ class RegisterService {
     }
 }
 exports.default = RegisterService;
+//# sourceMappingURL=register.service.js.map

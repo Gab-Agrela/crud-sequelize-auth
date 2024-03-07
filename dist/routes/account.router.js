@@ -20,3 +20,4 @@ accountRouter.get("/email/:email", hasEmail, controller.user.getByEmail.bind(con
 accountRouter.post("/register", hasUsername, hasEmail, hasPassword, controller.register.createUser.bind(controller.register));
 accountRouter.post("/login", hasUsername, hasPassword, controller.login.auth.bind(controller.login));
 exports.default = accountRouter;
+//# sourceMappingURL=account.router.js.map

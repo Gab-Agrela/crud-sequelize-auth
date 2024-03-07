@@ -65,3 +65,4 @@ class AuthMiddleware {
     }
 }
 exports.default = AuthMiddleware;
+//# sourceMappingURL=auth.middleware.js.map

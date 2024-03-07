@@ -35,3 +35,4 @@ class RegisterController {
     }
 }
 exports.default = RegisterController;
+//# sourceMappingURL=register.controller.js.map

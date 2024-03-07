@@ -14,3 +14,4 @@ app.use((err, _req, res, _next) => {
     return res.status(500).json({ message: err.message });
 });
 exports.default = app;
+//# sourceMappingURL=app.js.map

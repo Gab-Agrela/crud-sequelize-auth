@@ -57,3 +57,4 @@ User.init({
     timestamps: false,
 });
 exports.default = User;
+//# sourceMappingURL=User.js.map

@@ -39,3 +39,4 @@ class AccountMiddleware {
     }
 }
 exports.default = AccountMiddleware;
+//# sourceMappingURL=account.middleware.js.map

@@ -43,3 +43,4 @@ class AccountController {
     }
 }
 exports.default = AccountController;
+//# sourceMappingURL=account.controller.js.map

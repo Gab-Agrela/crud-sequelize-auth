@@ -19,3 +19,4 @@ productRouter.get("/read", middleware.product.hasSomeDifferentField, controller.
 productRouter.patch("/update", controller.update.bind(controller));
 productRouter.delete("/delete/:id", middleware.product.hasId, controller.delete.bind(controller));
 exports.default = productRouter;
+//# sourceMappingURL=product.router.js.map

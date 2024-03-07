@@ -49,3 +49,4 @@ const formatTypeThree = (userId, entry) => {
     });
 };
 exports.formatTypeThree = formatTypeThree;
+//# sourceMappingURL=mapProductEntrie.js.map
