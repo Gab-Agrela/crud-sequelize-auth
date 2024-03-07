@@ -6,5 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
 require("dotenv/config");
 const PORT = process.env.PORT || 3001;
+app_1.default.get("/", (_req, res) => {
+    return res.send("Express Typescript on Vercel");
+});
 app_1.default.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 //# sourceMappingURL=index.js.map
