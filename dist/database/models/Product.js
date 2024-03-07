@@ -27,8 +27,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = __importStar(require("sequelize"));
-const _1 = __importDefault(require("."));
 const User_1 = __importDefault(require("./User"));
+const _1 = __importDefault(require("."));
 class Product extends sequelize_1.Model {
 }
 Product.init({
