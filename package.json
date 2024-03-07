@@ -6,9 +6,9 @@
   "scripts": {
     "start": "ts-node-esm src/server.ts",
     "dev": "tsnd .",
-    "build": "rimraf dist && tsc",
+    "build": "rimraf build && tsc",
     "ts.check": "tsc --project tsconfig.json",
-    "add-build": "git add dist"
+    "add-build": "git add build"
   },
   "pre-commit": [
     "ts.check",
