@@ -1,6 +1,7 @@
 import sequelize, { Model } from "sequelize";
+
 import User from "./User";
-import { db } from "../config/database";
+import db from ".";
 
 type TOptions = {
   price: number;
