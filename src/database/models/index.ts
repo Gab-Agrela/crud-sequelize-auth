@@ -1,9 +1,6 @@
 import { Sequelize } from "sequelize";
-import "dotenv/config";
+import * as config from "../config/database";
 
-const sequelize = new Sequelize(process.env.POSTGRES_URL, {
-  dialect: "postgres",
-  dialectModule: require("pg"),
-});
+const sequelize = new Sequelize(config);
 
 export default sequelize;
