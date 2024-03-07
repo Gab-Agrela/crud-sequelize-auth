@@ -13,6 +13,7 @@ class ProductMiddleware {
     const { query } = req;
     const fields = Object.keys(query);
     const allowedFields = ["name", "brand", "model", "id"];
+    if (!query) return next();
     if (fields.some((field) => !allowedFields.includes(field))) {
       return res.status(400).json({
         message: `Invalid param: should be name, brand, model or id `,
