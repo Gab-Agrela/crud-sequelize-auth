@@ -27,60 +27,61 @@ class ProductService {
     return product;
   }
 
-  async update(id: number, fieldsToUpdate: TProductUpdate) {
+  async update(userId: number, id: number, fieldsToUpdate: TProductUpdate) {
     const product = await this.model.update(
       { ...fieldsToUpdate },
-      { where: { id } }
+      { where: { userId, id } }
     );
     return product;
   }
 
-  async delete(id: number) {
-    const product = await this.model.destroy({ where: { id } });
+  async delete(userId: number, id: number) {
+    const product = await this.model.destroy({ where: { userId, id } });
     return product;
   }
 
-  async find(param: TProductFind) {
-    const product = await this.model.findAll({ where: { ...param } });
+  async find(userId: number, param: TProductFind) {
+    const product = await this.model.findAll({ where: { userId, ...param } });
     if (!product.length) throw new Error("Product not found");
     return product;
   }
 
-  async nameAlreadyExist(name: string) {
-    const product = await this.model.findOne({ where: { name } });
+  async nameAlreadyExist(userId: number, name: string) {
+    const product = await this.model.findOne({ where: { userId, name } });
+    console.log("adasd chegou");
     if (product) throw new Error("Name already registered");
     return;
   }
 
-  async brandAlreadyExist(brand: string) {
-    const product = await this.model.findOne({ where: { brand } });
+  async brandAlreadyExist(userId: number, brand: string) {
+    const product = await this.model.findOne({ where: { userId, brand } });
     if (product) throw new Error("Brand already registered");
     return;
   }
 
-  async modelAlreadyExist(model: string) {
-    const product = await this.model.findOne({ where: { model } });
+  async modelAlreadyExist(userId: number, model: string) {
+    const product = await this.model.findOne({ where: { userId, model } });
     if (product) throw new Error("Model already registered");
     return;
   }
 
-  async getById(id: number) {
-    const product = await this.model.findOne({ where: { id } });
+  async getById(userId: number, id: number) {
+    const product = await this.model.findOne({ where: { userId, id } });
     if (!product) throw new Error("Product not found");
     return product;
   }
 
   async validateUniqueFields(data: TProduct | Array<TProduct>) {
     if (Array.isArray(data)) {
-      for (const { name, brand, model } of data) {
-        await this.nameAlreadyExist(name);
-        await this.brandAlreadyExist(brand);
-        await this.modelAlreadyExist(model);
+      for (const { userId, name, brand, model } of data) {
+        await this.nameAlreadyExist(userId, name);
+        await this.brandAlreadyExist(userId, brand);
+        await this.modelAlreadyExist(userId, model);
       }
     } else {
-      await this.nameAlreadyExist(data.name);
-      await this.brandAlreadyExist(data.brand);
-      await this.modelAlreadyExist(data.model);
+      await this.nameAlreadyExist(data.userId, data.name);
+      await this.brandAlreadyExist(data.userId, data.brand);
+      await this.modelAlreadyExist(data.userId, data.model);
     }
     return;
   }

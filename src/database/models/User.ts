@@ -1,5 +1,6 @@
 import sequelize, { Model } from "sequelize";
 import db from ".";
+import Product from "./Product";
 
 class User extends Model {
   declare id: number;

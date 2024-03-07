@@ -17,12 +17,14 @@ class ProductController {
   async create(req: Request, resp: Response, next: NextFunction) {
     try {
       const { body } = req;
+      const { userId } = resp.locals;
       const mapTypeOfContent = {
-        1: (body: TProductTypeOne) => formatTypeOne(body),
-        2: (body: TProductTypeTwo) => formatTypeTwo(body),
-        3: (body: Array<TProductTypeThree>) => formatTypeThree(body),
+        1: (body: TProductTypeOne) => formatTypeOne(userId, body),
+        2: (body: TProductTypeTwo) => formatTypeTwo(userId, body),
+        3: (body: Array<TProductTypeThree>) => formatTypeThree(userId, body),
       };
       const productFormatted = mapTypeOfContent[typeOfContent(body)](body);
+      console.log(productFormatted);
 
       await this.service.validateUniqueFields(productFormatted);
 
@@ -34,7 +36,6 @@ class ProductController {
           .status(200)
           .json({ message: "Product created", data: products });
       }
-
       const product = await this.service.create(productFormatted as TProduct);
       return resp
         .status(200)
@@ -48,10 +49,11 @@ class ProductController {
       const {
         body: { id, ...fieldsToUpdate },
       } = req;
+      const { userId } = resp.locals;
 
-      await this.service.getById(id);
+      await this.service.getById(userId, id);
 
-      const [product] = await this.service.update(id, fieldsToUpdate);
+      const [product] = await this.service.update(userId, id, fieldsToUpdate);
       if (!product) throw new Error("Error when updating product");
 
       return resp
@@ -64,10 +66,11 @@ class ProductController {
   async delete(req: Request, resp: Response, next: NextFunction) {
     try {
       const { id } = req.params;
+      const { userId } = resp.locals;
       const convertedIdToNumber = +id;
-      await this.service.getById(convertedIdToNumber);
+      await this.service.getById(userId, convertedIdToNumber);
 
-      const product = await this.service.delete(convertedIdToNumber);
+      const product = await this.service.delete(userId, convertedIdToNumber);
 
       return resp
         .status(200)
@@ -79,7 +82,8 @@ class ProductController {
   async read(req: Request, resp: Response, next: NextFunction) {
     try {
       const { query } = req;
-      const product = await this.service.find(query as TProductFind);
+      const { userId } = resp.locals;
+      const product = await this.service.find(userId, query as TProductFind);
 
       return resp.status(200).json({ message: "Product found", data: product });
     } catch (error) {

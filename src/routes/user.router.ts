@@ -14,7 +14,7 @@ const controller = {
 const { hasEmail, hasPassword, hasUsername } = new UserMiddleware();
 
 userRouter.get(
-  "/read/:username",
+  "/username/:username",
   hasUsername,
   controller.user.getByUsername.bind(controller.user)
 );
