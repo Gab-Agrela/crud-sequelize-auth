@@ -1,15 +1,7 @@
 import "dotenv/config";
-import { Options } from "sequelize";
 
-const { POSTGRES_USER, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_DATABASE } =
-  process.env;
+const { POSTGRES_URL } = process.env;
 
-const config: Options = {
-  username: POSTGRES_USER,
-  password: POSTGRES_PASSWORD,
-  database: POSTGRES_DATABASE,
-  dialect: "postgres",
-  host: POSTGRES_HOST,
-};
+const config = POSTGRES_URL;
 
-export = config;
+export default config;
