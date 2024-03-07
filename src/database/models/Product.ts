@@ -1,5 +1,6 @@
 import sequelize, { Model } from "sequelize";
 import db from ".";
+import User from "./User";
 
 type TOptions = {
   price: number;
@@ -8,6 +9,7 @@ type TOptions = {
 
 class Product extends Model {
   declare id: number;
+  declare userId: number;
   declare name: string;
   declare brand: string;
   declare model: string;
@@ -24,10 +26,13 @@ Product.init(
       allowNull: false,
       primaryKey: true,
     },
+    userId: {
+      type: sequelize.INTEGER,
+      allowNull: false,
+    },
     name: {
       type: sequelize.STRING,
       allowNull: false,
-      unique: true,
     },
     brand: {
       type: sequelize.STRING,
@@ -36,7 +41,6 @@ Product.init(
     model: {
       type: sequelize.STRING,
       allowNull: false,
-      unique: true,
     },
     options: {
       type: sequelize.ARRAY(sequelize.JSONB),
@@ -56,5 +60,8 @@ Product.init(
     tableName: "products",
   }
 );
+
+User.hasMany(Product, { as: "products", foreignKey: "userId" });
+Product.belongsTo(User, { foreignKey: "userId" });
 
 export default Product;

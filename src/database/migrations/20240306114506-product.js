@@ -10,19 +10,26 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
       },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
       name: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
       brand: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       model: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
       options: {
         type: Sequelize.ARRAY(Sequelize.JSONB),

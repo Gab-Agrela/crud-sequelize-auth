@@ -14,11 +14,9 @@ class ProductMiddleware {
     const fields = Object.keys(query);
     const allowedFields = ["name", "brand", "model", "id"];
     if (fields.some((field) => !allowedFields.includes(field))) {
-      return res
-        .status(400)
-        .json({
-          message: `Invalid param: should be name, brand, model or id `,
-        });
+      return res.status(400).json({
+        message: `Invalid param: should be name, brand, model or id `,
+      });
     }
     return next();
   }

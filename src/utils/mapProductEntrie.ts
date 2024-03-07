@@ -24,6 +24,7 @@ export type TProductTypeThree = {
 };
 
 export type TProduct = {
+  userId: number;
   name: string;
   brand: string;
   model: string;
@@ -38,9 +39,10 @@ const typeOfContent = (
   return 1;
 };
 
-const formatTypeOne = (entry: TProductTypeOne): TProduct => {
+const formatTypeOne = (userId: number, entry: TProductTypeOne): TProduct => {
   const { name, brand, model, price, color } = entry;
   return {
+    userId,
     name,
     brand,
     model,
@@ -48,13 +50,14 @@ const formatTypeOne = (entry: TProductTypeOne): TProduct => {
   };
 };
 
-const formatTypeTwo = (entry: TProductTypeTwo): TProduct => {
+const formatTypeTwo = (userId: number, entry: TProductTypeTwo): TProduct => {
   const {
     name,
     price,
     details: { brand, model, color },
   } = entry;
   return {
+    userId,
     name,
     brand,
     model,
@@ -67,10 +70,14 @@ const formatTypeTwo = (entry: TProductTypeTwo): TProduct => {
   };
 };
 
-const formatTypeThree = (entry: Array<TProductTypeThree>): Array<TProduct> => {
+const formatTypeThree = (
+  userId: number,
+  entry: Array<TProductTypeThree>
+): Array<TProduct> => {
   return entry.map((product) => {
     const { name, brand, model, data } = product;
     return {
+      userId,
       name,
       brand,
       model,
