@@ -24,7 +24,6 @@ class ProductController {
         3: (body: Array<TProductTypeThree>) => formatTypeThree(userId, body),
       };
       const productFormatted = mapTypeOfContent[typeOfContent(body)](body);
-      console.log(productFormatted);
 
       await this.service.validateUniqueFields(productFormatted);
 

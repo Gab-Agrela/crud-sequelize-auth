@@ -48,7 +48,6 @@ class ProductService {
 
   async nameAlreadyExist(userId: number, name: string) {
     const product = await this.model.findOne({ where: { userId, name } });
-    console.log("adasd chegou");
     if (product) throw new Error("Name already registered");
     return;
   }
