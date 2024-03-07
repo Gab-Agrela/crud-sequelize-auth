@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-class UserMiddleware {
+class AccountMiddleware {
   async hasUsername(req: Request, res: Response, next: NextFunction) {
     const { method } = req;
     const { username } = method === "GET" ? req.params : req.body;
@@ -26,4 +26,4 @@ class UserMiddleware {
   }
 }
 
-export default UserMiddleware;
+export default AccountMiddleware;

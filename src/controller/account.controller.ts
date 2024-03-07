@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import UserService from "../services/user.service";
+import AccountService from "../services/account.service";
 
-class UserController {
-  private service: UserService = new UserService();
+class AccountController {
+  private service: AccountService = new AccountService();
 
   async getByUsername(req: Request, res: Response, next: NextFunction) {
     try {
@@ -29,4 +29,4 @@ class UserController {
   }
 }
 
-export default UserController;
+export default AccountController;

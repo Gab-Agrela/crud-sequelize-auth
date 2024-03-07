@@ -3,7 +3,7 @@ import { ModelStatic } from "sequelize";
 import User from "../database/models/User";
 import resp from "../utils/resp";
 
-class UserService {
+class AccountService {
   private model: ModelStatic<User> = User;
 
   async getByUsername(username: string) {
@@ -31,4 +31,4 @@ class UserService {
   }
 }
 
-export default UserService;
+export default AccountService;

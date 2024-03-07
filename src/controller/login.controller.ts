@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import * as bcrypt from "bcrypt";
 
-import UserService from "../services/user.service";
+import UserService from "../services/account.service";
 import generateJwtToken from "../utils/jwtToken";
 
 class LoginController {

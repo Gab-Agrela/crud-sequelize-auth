@@ -1,10 +1,10 @@
 import { Router } from "express";
 import RegisterController from "../controller/register.controller";
-import UserMiddleware from "../middleware/user.middleware";
+import UserMiddleware from "../middleware/account.middleware";
 import LoginController from "../controller/login.controller";
-import UserController from "../controller/user.controller";
+import UserController from "../controller/account.controller";
 
-const userRouter = Router();
+const accountRouter = Router();
 
 const controller = {
   register: new RegisterController(),
@@ -13,19 +13,19 @@ const controller = {
 };
 const { hasEmail, hasPassword, hasUsername } = new UserMiddleware();
 
-userRouter.get(
+accountRouter.get(
   "/username/:username",
   hasUsername,
   controller.user.getByUsername.bind(controller.user)
 );
 
-userRouter.get(
+accountRouter.get(
   "/email/:email",
   hasEmail,
   controller.user.getByEmail.bind(controller.user)
 );
 
-userRouter.post(
+accountRouter.post(
   "/register",
   hasUsername,
   hasEmail,
@@ -33,11 +33,11 @@ userRouter.post(
   controller.register.createUser.bind(controller.register)
 );
 
-userRouter.post(
+accountRouter.post(
   "/login",
   hasUsername,
   hasPassword,
   controller.login.auth.bind(controller.login)
 );
 
-export default userRouter;
+export default accountRouter;
