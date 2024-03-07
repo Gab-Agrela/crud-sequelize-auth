@@ -1,11 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
-// const {POSTGRES_URL} = process.env
-const config = {
-    username: "postgres",
-    password: "1234",
-    database: "postgres",
-    dialect: "postgres",
-    host: "localhost",
-};
-module.exports = config;
+const { POSTGRES_URL } = process.env;
+const config = POSTGRES_URL;
+exports.default = config;
